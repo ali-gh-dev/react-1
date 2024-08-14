@@ -12,6 +12,14 @@ function App() {
 
     const [tasks, setTasks] = useState(initial_tasks)
 
+    function add_new_task(ev) {
+        let entered_txt = ev.target.value
+        if (ev.key === "Enter" && entered_txt !== "" ) {
+            setTasks([...tasks, {title: entered_txt, checked: false}] )
+            ev.target.value = ""
+        }
+    }
+
     return (
         <>
             <div className="bg-gray-100">
@@ -22,12 +30,13 @@ function App() {
                         </div>
                         <div className="relative">
                             <input type="text" placeholder="What needs to be done today?"
-                                   className="w-full px-2 py-3 border rounded outline-none border-grey-600"/>
+                                   className="w-full px-2 py-3 border rounded outline-none border-grey-600"
+                                   onKeyPress={add_new_task}/>
                         </div>
                         <ul className="list-reset">
                             {/* eslint-disable-next-line react/jsx-key */}
                             {
-                                tasks.map((obj,index) => <Task task_data={obj} key={index}/>)
+                                tasks.map((obj, index) => <Task task_data={obj} key={index}/>)
                             }
                         </ul>
                     </div>
