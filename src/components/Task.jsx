@@ -5,14 +5,16 @@ function Task({task_data}) {
         <>
             <li className="relative flex items-center justify-between px-2 py-6 border-b">
                 <div>
-                    {/* eslint-disable-next-line react/prop-types */}
-                    {task_data?.checked
-                        ? <input type="checkbox" checked onChange={() => {}}/>
-                        : <input type="checkbox" />
-                    }
 
                     {/* eslint-disable-next-line react/prop-types */}
-                    <p className="inline-block mt-1 ml-2 text-gray-600">{task_data?.title}</p>
+                    <input type="checkbox" checked={task_data?.checked} onChange={() => {}}/>
+
+                    {/* eslint-disable-next-line react/prop-types */}
+                    <p className={`inline-block mt-1 ml-2 text-gray-600 ${task_data?.checked ? "line-through" : ""}`}>
+                        {/* eslint-disable-next-line react/prop-types */}
+                        {task_data?.title}
+                    </p>
+
                 </div>
                 <button type="button" className="absolute right-0 flex items-center space-x-1">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-blue-600"
