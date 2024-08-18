@@ -1,23 +1,31 @@
 import Task from "./components/Task.jsx";
 import {useState} from "react";
+import {v4 as uuidv4} from 'uuid';
 
 
 function App() {
 
     let initial_tasks = [
-        {title: "task number 1", checked: false},
-        {title: "task number 2", checked: true},
-        {title: "task number 3", checked: false}
+        {id: uuidv4(), title: "task number 1", checked: false},
+        {id: uuidv4(), title: "task number 2", checked: true},
+        {id: uuidv4(), title: "task number 3", checked: false}
     ]
 
     const [tasks, setTasks] = useState(initial_tasks)
 
     function add_new_task(ev) {
         let entered_txt = ev.target.value
-        if (ev.key === "Enter" && entered_txt !== "" ) {
-            setTasks([...tasks, {title: entered_txt, checked: false}] )
+        if (ev.key === "Enter" && entered_txt !== "") {
+            setTasks([...tasks, {id: uuidv4(), title: entered_txt, checked: false}])
             ev.target.value = ""
         }
+    }
+
+    function delete_task(clicked_task_data) {
+        // setTasks(prevState => prevState.filter((item) => item?.id !== clicked_task_data?.id))
+        
+        let remaining_tasks = tasks.filter((item) => item?.id !== clicked_task_data?.id)
+        setTasks(remaining_tasks)
     }
 
     return (
@@ -36,7 +44,7 @@ function App() {
                         <ul className="list-reset">
                             {/* eslint-disable-next-line react/jsx-key */}
                             {
-                                tasks.map((obj, index) => <Task task_data={obj} key={index}/>)
+                                tasks.map((obj, index) => <Task task_data={obj} key={index} delete_func={delete_task}/>)
                             }
                         </ul>
                     </div>
