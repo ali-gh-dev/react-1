@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-function Task({task_data, delete_func}) {
+function Task({task_data, delete_func, checkbox_func}) {
 
     // function delete_task() {
     //     // console.log("delete icon clicked")
@@ -12,8 +12,9 @@ function Task({task_data, delete_func}) {
                 <div>
 
                     {/* eslint-disable-next-line react/prop-types */}
-                    <input type="checkbox" checked={task_data?.checked} onChange={() => {
-                    }}/>
+                    <input type="checkbox" checked={task_data?.checked}
+                           onChange={() => checkbox_func(task_data)}
+                    />
 
                     {/* eslint-disable-next-line react/prop-types */}
                     <p className={`inline-block mt-1 ml-2 text-gray-600 ${task_data?.checked ? "line-through" : ""}`}>

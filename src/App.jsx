@@ -23,9 +23,21 @@ function App() {
 
     function delete_task(clicked_task_data) {
         // setTasks(prevState => prevState.filter((item) => item?.id !== clicked_task_data?.id))
-        
+
         let remaining_tasks = tasks.filter((item) => item?.id !== clicked_task_data?.id)
         setTasks(remaining_tasks)
+    }
+
+    function toggle_checkbox(clicked_task_data) {
+
+        let new_tasks = tasks.map((taskItem) => {
+            if (taskItem.id === clicked_task_data.id) {
+                taskItem.checked = !(taskItem.checked)
+            }
+            return taskItem
+        })
+
+        setTasks(new_tasks)
     }
 
     return (
@@ -44,7 +56,14 @@ function App() {
                         <ul className="list-reset">
                             {/* eslint-disable-next-line react/jsx-key */}
                             {
-                                tasks.map((obj, index) => <Task task_data={obj} key={index} delete_func={delete_task}/>)
+                                tasks.map(
+                                    (obj, index) =>
+                                        <Task task_data={obj}
+                                              key={index}
+                                              delete_func={delete_task}
+                                              checkbox_func={toggle_checkbox}
+                                        />
+                                )
                             }
                         </ul>
                     </div>
