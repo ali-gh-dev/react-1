@@ -60,8 +60,8 @@ function App() {
                                     (obj, index) =>
                                         <Task task_data={obj}
                                               key={index}
-                                              delete_func={delete_task}
                                               checkbox_func={toggle_checkbox}
+                                              delete_func={delete_task}
                                         />
                                 )
                             }
