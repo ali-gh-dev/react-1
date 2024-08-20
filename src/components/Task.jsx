@@ -2,30 +2,34 @@
 import {useState} from "react";
 
 // eslint-disable-next-line react/prop-types
-function Task({task_data, checkbox_func, delete_func}) {
+function Task({task_data, checkbox_func, delete_func, edit_func}) {
 
     const [editMode, setEditMode] = useState(false)
+
+    function edit_task_title(event) {
+        if (event.key === "Enter") {
+            // console.log(event.target.value)
+            edit_func(task_data, event.target.value)
+            setEditMode(false)
+        }
+    }
 
     return (
         <>
             <li className="relative flex items-center justify-between px-2 py-6 border-b">
                 <div>
-
-
-                    {/*todo : complete this part*/}
+                    
                     {
                         // eslint-disable-next-line react/prop-types
                         editMode
                             ?
                             <div className="flex items-center">
                                 {/* eslint-disable-next-line react/prop-types */}
-                                <input type="text" value={task_data?.title}
+                                <input type="text" defaultValue={task_data?.title}
                                        className="w-full px-4 py-2 border border-gray-300 rounded"
-                                    // onChange={(event) => {
-                                    // if (event.key === "Enter") {
-                                    //     this.value = event.target.value
-                                    // }
-                                    // }}
+                                       onChange={() => {
+                                       }}
+                                       onKeyDown={edit_task_title}
                                 />
                                 <button type="button" className="absolute right-0 flex items-center space-x-1">
 

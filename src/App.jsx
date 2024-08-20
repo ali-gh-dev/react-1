@@ -40,6 +40,17 @@ function App() {
         setTasks(new_tasks)
     }
 
+    function edit_task(clicked_task_data, new_title){
+        let new_tasks = tasks.map((taskItem) => {
+            if (taskItem.id === clicked_task_data.id) {
+                taskItem.title = new_title
+            }
+            return taskItem
+        })
+
+        setTasks(new_tasks)
+    }
+
     return (
         <>
             <div className="bg-gray-100">
@@ -62,6 +73,7 @@ function App() {
                                               key={index}
                                               checkbox_func={toggle_checkbox}
                                               delete_func={delete_task}
+                                              edit_func={edit_task}
                                         />
                                 )
                             }
